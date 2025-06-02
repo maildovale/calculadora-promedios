@@ -1,81 +1,80 @@
 def ingresar_calificaciones():
     """
-    Solicita al usuario ingresar nombre de materia y calificación.
-    Devuelve dos listas: materias[] y calificaciones[].
+    Solicita al usuario ingresar materias y sus calificaciones.
+    Devuelve dos listas: una con los nombres de las materias y otra con las calificaciones.
     """
     materias = []
     calificaciones = []
 
-    print("📘 Ingresá materias y sus calificaciones (0 a 10). Escribí 'fin' para terminar.\n")
+    print("Ingresar materias y calificaciones (entre 0 y 10). Escribir 'fin' para terminar.")
 
     while True:
-        materia = input("Nombre de la materia (o 'fin' para terminar): ").strip()
-        if materia.lower() == 'fin':
+        materia = input("Nombre de la materia: ").strip()
+        if materia.lower() == "fin":
             break
         if not materia:
-            print("⚠️ El nombre de la materia no puede estar vacío.")
+            print("El nombre de la materia no puede estar vacío.")
             continue
         if materia in materias:
-            print("⚠️ Ya ingresaste esa materia. Evitá duplicados.")
+            print("La materia ya fue ingresada.")
             continue
 
         try:
-            nota = float(input(f"Ingresá la calificación para {materia}: "))
+            nota = float(input(f"Calificación para {materia}: "))
             if 0 <= nota <= 10:
                 materias.append(materia)
                 calificaciones.append(nota)
             else:
-                print("⚠️ La calificación debe estar entre 0 y 10.")
+                print("La calificación debe estar entre 0 y 10.")
         except ValueError:
-            print("❌ Entrada inválida. Ingresá un número.")
+            print("Entrada inválida. Ingresar un número.")
 
     return materias, calificaciones
 
 
 def calcular_promedio(calificaciones):
-    if len(calificaciones) == 0:
+    if not calificaciones:
         return None
     return sum(calificaciones) / len(calificaciones)
 
 
 def determinar_estado(calificaciones, umbral):
     """
-    Devuelve una lista de 'Aprobado' o 'Reprobado' según el umbral indicado.
+    Clasifica cada calificación como 'Aprobado' o 'Reprobado' según el umbral.
     """
-    return ['Aprobado' if nota >= umbral else 'Reprobado' for nota in calificaciones]
+    return ["Aprobado" if nota >= umbral else "Reprobado" for nota in calificaciones]
 
 
 def encontrar_extremos(calificaciones):
     """
-    Retorna una tupla con los índices de la calificación máxima y mínima.
+    Retorna los índices de la calificación máxima y mínima.
     """
     if not calificaciones:
         return None, None
-    max_index = calificaciones.index(max(calificaciones))
-    min_index = calificaciones.index(min(calificaciones))
-    return max_index, min_index
+    max_i = calificaciones.index(max(calificaciones))
+    min_i = calificaciones.index(min(calificaciones))
+    return max_i, min_i
 
 
 def mostrar_resultados(materias, calificaciones, estados, promedio, umbral):
-    print("\n📊 Resultados:")
+    print("\nResultados por materia:")
     for i in range(len(materias)):
-        print(f" - {materias[i]}: {calificaciones[i]:.2f} ➜ {estados[i]}")
-    
-    print(f"\n🔢 Promedio general: {promedio:.2f}")
-    print(f"📈 Umbral de aprobación: {umbral:.1f}")
+        print(f"{materias[i]}: {calificaciones[i]:.2f} - {estados[i]}")
+
+    print(f"\nPromedio general: {promedio:.2f}")
+    print(f"Umbral de aprobación: {umbral:.1f}")
 
     max_i, min_i = encontrar_extremos(calificaciones)
     if max_i is not None:
-        print(f"⭐ Materia con mayor nota: {materias[max_i]} ({calificaciones[max_i]:.2f})")
-        print(f"⚠️ Materia con menor nota: {materias[min_i]} ({calificaciones[min_i]:.2f})")
+        print(f"Materia con mayor nota: {materias[max_i]} ({calificaciones[max_i]:.2f})")
+        print(f"Materia con menor nota: {materias[min_i]} ({calificaciones[min_i]:.2f})")
 
 
 def main():
-    print("🎓 Calculadora de Promedios con Materias\n")
     materias, calificaciones = ingresar_calificaciones()
 
     if not materias:
-        print("No se ingresaron materias ni calificaciones.")
+        print("No se ingresaron datos.")
         return
 
     umbral = 5.0
