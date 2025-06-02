@@ -1,14 +1,16 @@
-# Calculadora de Promedios Escolares
+# Calculadora de Promedios por Materia
 
-Una sencilla calculadora en Python para ingresar notas, calcular el promedio y mostrar si el estudiante aprueba o reprueba. Ideal para prácticas de programación básica: uso de variables, operadores, funciones y estructuras de control.
+Este proyecto en Python permite ingresar nombres de materias y sus respectivas calificaciones, calcular el promedio general, determinar el estado académico (aprobado o reprobado) según un umbral definido, e identificar las materias con la nota más alta y más baja.
 
----
+## Requisitos
 
-## 🚀 ¿Cómo usarla?
+- Python 3.x
 
-1. Asegurate de tener instalado Python 3.
-2. Cloná el repositorio o descargá el archivo `calculadora_promedios.py`.
-3. Abrí una terminal y ejecutá:
+## Ejecución
+
+1. Clonar el repositorio o descargar el archivo `calculadora_promedios.py`.
+2. Abrir una terminal en la carpeta del archivo.
+3. Ejecutar:
 
 ```bash
 python calculadora_promedios.py
